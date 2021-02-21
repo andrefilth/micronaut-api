@@ -2,7 +2,7 @@ micronaut:
   application:
     name: micronautApi
   server:
-    port: 8081
+    port: -1
   caches:
     headlines:
       charset: 'UTF-8'
