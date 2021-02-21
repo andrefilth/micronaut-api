@@ -1,4 +1,4 @@
-package com.api.micro
+package com.api.device.restapi
 
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest

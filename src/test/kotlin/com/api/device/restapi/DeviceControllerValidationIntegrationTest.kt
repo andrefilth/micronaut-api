@@ -1,7 +1,6 @@
 package com.api.device.restapi
 
 import com.api.device.domain.devices.DeviceRequest
-import com.api.micro.BaseTestIntegration
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.restassured.http.ContentType
