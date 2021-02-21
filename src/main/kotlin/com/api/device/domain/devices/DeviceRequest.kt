@@ -9,9 +9,17 @@ import javax.validation.constraints.NotBlank
 @Introspected
 data class DeviceRequest(
 
-    @JsonProperty("user_id")  @field:NotBlank(message = "O user_id é um campo obrigatório") val userId: String,
-    @JsonProperty("device_id")  @field:NotBlank val deviceId: String,
-    @JsonProperty("installation_id")  @field:NotBlank val installationId: String,
+    @JsonProperty("user_id")
+    @field:NotBlank(message = "O user_id é um campo obrigatório")
+    val userId: String,
+
+    @JsonProperty("device_id")
+    @field:NotBlank(message = "O device_id é um campo obrigatório")
+    val deviceId: String,
+
+    @JsonProperty("installation_id")
+    @field:NotBlank(message = "O installation_id é um campo obrigatório")
+    val installationId: String,
 ) {
 
 }
