@@ -1,4 +1,4 @@
-package com.api.device.infra.handle.exception
+package com.api.device.infra.handle.exception.response
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class ErrorResponse(
     @JsonProperty("short_message")
     val shortMessage: String? = null,
-    val message: String =  "Ops! Ocorreu um erro inesperado.",
+    val message: String? =  "Ops! Ocorreu um erro inesperado.",
     val code: String? = null,
     val field: String? = null,
     val data: Any? = null,

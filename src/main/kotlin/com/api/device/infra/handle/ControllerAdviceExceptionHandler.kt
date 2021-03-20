@@ -1,36 +1,25 @@
 package com.api.device.infra.handle
 
-import com.api.device.infra.handle.exception.ErrorResponse
-import io.micronaut.http.HttpStatus
+import com.api.device.infra.handle.exception.notfound.NotFoundException
+import com.api.device.infra.handle.extractor.FiedToErroRespondeExtractor
+import io.micronaut.http.HttpStatus.BAD_REQUEST
+import io.micronaut.http.HttpStatus.NOT_FOUND
 import io.micronaut.http.annotation.Error
 import io.micronaut.http.annotation.Status
-import java.util.stream.Collectors
+import javax.inject.Inject
 import javax.validation.ConstraintViolationException
-
 
 open class ControllerAdviceExceptionHandler {
 
-    @Error(exception = ConstraintViolationException::class)
-    @Status(HttpStatus.BAD_REQUEST)
-    open fun handler(ex: ConstraintViolationException): ErrorResponse? {
+    @Inject
+    lateinit var fiedToErroRespondeExtractor: FiedToErroRespondeExtractor
 
-        val violations = ex.constraintViolations
-        ex.localizedMessage
-        val map = violations
-            .stream()
-            .map {
-                ErrorResponse(
-                    message = it.messageTemplate,
-                    code = "CONSTRAINT_VIOLATION",
-                    shortMessage = "constraint violation error",
-                    field = it.propertyPath.toString()
-                )
-            }
-            .collect(Collectors.toSet())
-        return ErrorResponse(message = "Erro de validação de dados do formulário",
-            code = HttpStatus.BAD_REQUEST.name,
-            shortMessage = "constraint violation error",
-            errors = map
-        )
-    }
+    @Error(exception = ConstraintViolationException::class)
+    @Status(BAD_REQUEST)
+    open fun handler(exception: ConstraintViolationException) = fiedToErroRespondeExtractor.extract(exception)
+
+    @Error(exception = NotFoundException::class)
+    @Status(NOT_FOUND)
+    open fun handler(exception: NotFoundException) = exception.errorModel
+
 }
